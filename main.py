@@ -41,15 +41,24 @@ def main(page:Page):
     def check(e):
         global files
         global output_path
+        progress.visible = True
+        progress.update()
+        done = 0
         if len(files) != 0:
             for file_path in files:
+                
                 file_name_with_extension = os.path.basename(file_path)
                 file_name, _ = os.path.splitext(file_name_with_extension)
                 print(f"ファイル名: {file_name}")
                 print(f"パス: {file_path}")
                 command = ["cwebp", "-q", "80", file_path, "-o", f"{output_path}/{file_name}.webp"]
                 subprocess.Popen(command)
-                time.sleep(1)
+                done += 1
+                progress_value = done / len(files)
+                progress.value = progress_value
+                progress.update()
+                print(progress_value)
+                time.sleep(0.6)
 
         else:
             pass
@@ -57,9 +66,10 @@ def main(page:Page):
     open_dir_dialog = TextButton("保存先を選択",on_click=lambda _: pick_dir_dialog.get_directory_path())
     open_dialog = TextButton("ファイルを選択",on_click=lambda _: pick_files_dialog.pick_files(allow_multiple=True))
     conv_btn = ft.FloatingActionButton("変換する",on_click=check,icon=ft.icons.LOOP)
+    progress = ft.ProgressBar(disabled=True,visible=False)
 
     page.overlay.extend([pick_files_dialog,pick_dir_dialog])
 
-    page.add(Row([selected_files,open_dialog]),files_count,Row([output_dir,open_dir_dialog]),conv_btn)
+    page.add(Row([selected_files,open_dialog]),files_count,Row([output_dir,open_dir_dialog]),progress,conv_btn)
 
 ft.app(main)
