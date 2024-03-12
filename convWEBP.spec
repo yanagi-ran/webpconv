@@ -34,5 +34,6 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    version='C:\\Users\\maeo\\AppData\\Local\\Temp\\45ab3ec0-f14a-44c1-99f2-ada3f0e092c3',
+    version='C:\\Users\\maeo\\AppData\\Local\\Temp\\6e0ef7c8-d010-450e-b2f4-6f59b4fe2f81',
+    icon=['icon.png'],
 )
