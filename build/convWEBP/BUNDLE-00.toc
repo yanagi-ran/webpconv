@@ -1,3 +1,0 @@
-([('convWEBP',
-   '/Users/main/Documents/GitHub/webpconv/dist/convWEBP',
-   'EXECUTABLE')],)
