@@ -58,7 +58,7 @@ def main(page:Page):
                 print(f"ファイル名: {file_name}")
                 print(f"パス: {file_path}")
                 command = ["cwebp", "-q", "80", file_path, "-o", f"{output_path}/{file_name}.webp"]
-                process = subprocess.Popen(command,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+                process = subprocess.Popen(command,stdout=subprocess.PIPE,stderr=subprocess.PIPE,creationflags=subprocess.CREATE_NO_WINDOW)
                 process.wait()
                 done += 1
                 progress_value = done / len(files)
